@@ -1,0 +1,30 @@
+<main>
+    <nav class="navbar">
+      <h3 class="logo"><a href="/">Newsie</a></h3>
+      <ul>
+        <li><a href="https://github.com/danieljvsa/plate-administrator">about</a></li>
+        @if(auth.user)
+        <li>
+          <a href="/logout" onclick="event.preventDefault();document.getElementById('logout').submit()">
+            logout
+            <form id="logout" action="/logout" method="POST">{{ csrfField() }}</form>
+          </a>
+        </li>
+        <li><a href="/articles/new">new</a></li>
+        @else
+        <li><a href="/login">login</a></li>
+        @endif
+
+      </ul>
+    </nav>
+    <div class="content">
+      @!section("page")
+    </div>
+  </main>
+
+  <footer>
+    (c) Company 42
+    <span style="float:right"><a href="https://github.com/prashanth1k/newsie-adonisjs-sample-app">github</a></span>
+  </footer>
+</body>
+</html>

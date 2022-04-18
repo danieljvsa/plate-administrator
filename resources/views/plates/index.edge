@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plate Recognizer - security service to your garage!</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"/>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="https://kit.fontawesome.com/de306f5493.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<main>
+  <nav class="navbar">
+    <h3 class="logo"><a href="/plates">Plate Recognizer</a></h3>
+    <ul>
+      <li><a href="https://github.com/danieljvsa/plate-administrator">about</a></li>
+      @if(auth.user)
+      <li>
+        <a href="/logout" onclick="event.preventDefault();document.getElementById('logout').submit()">
+          logout
+          <form id="logout" action="/logout" method="POST">{{ csrfField() }}</form>
+        </a>
+      </li>
+      <li><a href="/plates/new">new</a></li>
+      @else
+      <li><a href="/login">login</a></li>
+      @endif
+
+    </ul>
+  </nav>
+  <div class="content">
+    <h2>Registered Plates</h2>
+    <div class="row row-wrap">
+      @each(plate in plates)
+      <div class="column column-50">
+        <aside class="card">
+          @if(auth.user)
+          <a href="/plates/{{plate.id}}/delete" class="article-meta-small"
+            ><img src="/icons8-remover.svg" style="height:18px; width: 18px" /></a
+          >
+          <a href="/plates/{{plate.id}}/edit" class="article-meta-small"
+            ><img src="/icons8-editar.svg" style="height:18px; width: 18px" /></a
+          >
+          
+          @endif
+          <h3>
+            
+            {{ plate.plate_number }}
+            
+          </h3>
+          
+          
+        </aside>
+      </div>
+      @endeach
+    </div>
+  </div>
+</main>
+
+<footer>
+  (c) Company 42
+  <span style="float:right"><a href="https://github.com/danieljvsa/plate-administrator">github</a></span>
+</footer>
+</body>
+</html>
+

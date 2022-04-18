@@ -1,3 +1,4 @@
+<!-- prettier-ignore -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,7 @@
 
   <main>
     <nav class="navbar">
-      <h3 class="logo"><a href="/">Plate Recognizer</a></h3>
+      <h3 class="logo"><a href="/plates">Plate Recognizer</a></h3>
       <ul>
         <li><a href="https://github.com/danieljvsa/plate-administrator">about</a></li>
         @if(auth.user)
@@ -29,16 +30,37 @@
 
       </ul>
     </nav>
-      
     <div class="content">
-      <h2 align="center" >Welcome to Plate Admnistrator!</h2>
-      <p align="center">Here you can administrate all authorized plates and keep your home safe.</p>
-    </div>
-  </main>
+        <div>
+            <h3 class="article-title">Update Plate</h3>
+            <article>
+            @if(flashMessages.has('errors.plate_number'))
+            <p class="error-text">
+                {{flashMessages.get("errors.title")}}
+            </p>
+            @endif
+            @if(flashMessages.has('notification'))
+                <p class="info-text">
+                    {{flashMessages.get("notification")}}
+                </p>
+            @endif
+            <form action="{{ `/plates/${plate.id}?_method=PATCH`}}" method="POST">
+                {{ csrfField() }}
+                <label for="plate_number">Title</label>
+                <input type="text" value="{{plate.plate_number}}" name="plate_number">
+                
 
-  <footer>
+                <button type="submit">Save</button>
+
+            </form>
+
+        </div>
+    </div>
+    </main>
+
+    <footer>
     (c) Company 42
     <span style="float:right"><a href="https://github.com/danieljvsa/plate-administrator">github</a></span>
-  </footer>
-</body>
-</html>
+    </footer>
+    </body>
+    </html>
