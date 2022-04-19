@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "node ace build --prod",
-    "start": "node ace serve --watch",
+    "start": "ENV_SILENT=true node build/server.js",
     "start:prod": "node ./build/server.js"
   },
   "devDependencies": {
