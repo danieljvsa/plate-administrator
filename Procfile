@@ -1,2 +1,2 @@
-web: node ace migration:run --force && node build/server.js
-release: node build/ace migration:run --force
+release: ENV_SILENT=true node ace migration:run --force && node ace db:seed 
+web: npm run start:prod
