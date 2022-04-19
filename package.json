@@ -5,7 +5,7 @@
   "scripts": {
     "build": "node ace build --prod",
     "start": "ENV_SILENT=true node build/server.js",
-    "start:prod": "node ./build/server.js"
+    "start:prod": "node build/server.js"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.6.2",
