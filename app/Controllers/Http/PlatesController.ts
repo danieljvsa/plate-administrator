@@ -23,7 +23,7 @@ export default class PlatesController {
         await Plate.create({
             plate_number: data.plate_number
         })
-        // return response.redirect(`/articles/${article.slug}`)
+        
         session.flash('notification', 'Plate saved.')
         return response.redirect('/plates')
     }
