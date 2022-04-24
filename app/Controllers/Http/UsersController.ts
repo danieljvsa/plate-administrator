@@ -1,6 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Users from 'App/Models/Users'
-
+//import knex from 'knex'
 
 
 export default class AuthController {

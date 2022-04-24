@@ -44,7 +44,7 @@
                     {{flashMessages.get("notification")}}
                 </p>
             @endif
-            <form action="{{ `/plates/${plate.id}?_method=PATCH`}}" method="POST">
+            <form action="{{ `/plates/${plate.plate_id}?_method=PATCH`}}" method="POST">
                 {{ csrfField() }}
                 <label for="plate_number">Title</label>
                 <input type="text" value="{{plate.plate_number}}" name="plate_number">

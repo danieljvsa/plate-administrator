@@ -5,8 +5,9 @@ export default class Plates extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
-      table.string('plate_number')      
+      table.increments('plate_id').primary()
+      table.string('plate_number')   
+      table.integer('user_id').unsigned().references('users.user_id').onDelete('CASCADE')   
     })
   }
 

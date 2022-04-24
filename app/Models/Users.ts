@@ -4,7 +4,7 @@ import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Users extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public user_id: number
 
   @column()
   public email: string
@@ -13,13 +13,13 @@ export default class Users extends BaseModel {
   public password: string
 
   @column()
-  public rememberMeToken?: string
+  public remember_me_token?: string
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
+  public created_at: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
+  public updated_at: DateTime
 
   @beforeSave()
   public static async hashPassword (users: Users) {

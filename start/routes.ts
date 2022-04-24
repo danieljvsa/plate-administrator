@@ -24,7 +24,7 @@ Route.get('/', async ({ view }) => {
   return view.render('welcome')
 })
 
-Route.get("/plates", "PlatesController.index");
+Route.get("/plates", "PlatesController.index").middleware("auth");
 Route.get("/show-plates", "PlatesController.show");
 Route.post("/login", "UsersController.login");
 Route.get("/login", "UsersController.showLogin");

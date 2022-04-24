@@ -2,10 +2,13 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Plate from 'App/Models/Plate'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
+
 export default class PlatesController {
-    public async index(ctx: HttpContextContract) {
-        const plates = await Plate.all()
-        return ctx.view.render('plates/index', { plates })
+    public async index({auth, view}: HttpContextContract) {
+        console.log(auth.user?.user_id)
+        const plates = await Plate.query().where('user_id', '=', auth.user!.user_id)
+        console.log(plates)
+        return view.render('plates/index', { plates: plates })
     }
 
     public async show({}: HttpContextContract) {
@@ -17,10 +20,11 @@ export default class PlatesController {
         return ctx.view.render('plates/new', { plate: {} })
     }
   
-    public async store({request, response, session}: HttpContextContract) {
+    public async store({request, response, session, auth}: HttpContextContract) {
         const data = await this.validateInput(request)
 
         await Plate.create({
+            userId: auth.user?.user_id,
             plate_number: data.plate_number
         })
         
@@ -31,13 +35,13 @@ export default class PlatesController {
     
   
     public async edit({view, params}: HttpContextContract) {
-        const plate = await Plate.findBy('id', params.id)
+        const plate = await Plate.findBy('plate_id', params.id)
         return view.render('plates/edit', { plate: plate })
     }
   
     public async update({ request, params, response, session }: HttpContextContract) {
         const data = await this.validateInput(request)
-        const plate = await Plate.findByOrFail('id', params.id)
+        const plate = await Plate.findByOrFail('plate_id', params.id)
         plate.merge({
             plate_number: data.plate_number
         })
@@ -47,7 +51,7 @@ export default class PlatesController {
     }
   
     public async destroy({params, response, session}: HttpContextContract) {
-        const plate = await Plate.findOrFail(params.id)
+        const plate = await Plate.findOrFail('plate_id', params.id)
 
         await plate.delete()
 
