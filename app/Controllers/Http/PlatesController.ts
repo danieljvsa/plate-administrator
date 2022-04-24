@@ -51,7 +51,7 @@ export default class PlatesController {
     }
   
     public async destroy({params, response, session}: HttpContextContract) {
-        const plate = await Plate.findOrFail('plate_id', params.id)
+        const plate = await Plate.findByOrFail('plate_id', params.id)
 
         await plate.delete()
 
